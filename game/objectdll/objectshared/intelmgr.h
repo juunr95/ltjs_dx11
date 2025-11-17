@@ -19,7 +19,7 @@
 class CIntelMgr;
 extern CIntelMgr* g_pIntelMgr;
 
-#define INTELMGR_DEFAULT_FILE		"Attributes\\IntelItems.txt"
+#define INTELMGR_DEFAULT_FILE		"SA_SCRIPTS\\IntelItems.txt"
 #define INTELMGR_INVALID_ID			255
 
 #define INTEL_MAX_NAME_LENGTH		32

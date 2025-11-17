@@ -141,7 +141,12 @@ public:
 			{
 				copy_func = copy_a8r8g8b8_to_v8u8_linear;
 			}
+			else if (src_format == D3DFMT_A8R8G8B8 && surface_desc.Format == D3DFMT_A8R8G8B8)
+			{
+				copy_func = copy_a8r8g8b8_linear;
+			}
 		}
+
 
 		if (!copy_func)
 		{
@@ -416,6 +421,49 @@ private:
 			dst_memory += locked_rect.Pitch;
 		}
 	}
+
+	static void copy_a8r8g8b8_linear(
+		const D3DSURFACE_DESC& surface_desc,
+		const int src_pitch,
+		const std::uint8_t* src_memory,
+		const D3DLOCKED_RECT& locked_rect)
+	{
+		auto dst_memory = static_cast<std::uint8_t*>(locked_rect.pBits);
+
+		for (int y = 0; y < (int)surface_desc.Height; y++)
+		{
+			auto dst_row = reinterpret_cast<std::uint32_t*>(dst_memory);
+
+			for (int x = 0; x < (int)surface_desc.Width; x++)
+			{
+				dst_row[x] = interpolate_pixel_linearly_a8r8g8b8(
+					x,
+					y,
+					(int)surface_desc.Width,
+					(int)surface_desc.Height,
+					src_pitch,
+					src_memory
+				);
+			}
+
+			dst_memory += locked_rect.Pitch;
+		}
+	}
+
+	static std::uint32_t interpolate_pixel_linearly_a8r8g8b8(
+		int x,
+		int y,
+		int width,
+		int height,
+		int src_pitch,
+		const std::uint8_t* src_memory)
+	{
+		const uint8_t* row = src_memory + y * src_pitch;
+		const uint32_t* line = reinterpret_cast<const uint32_t*>(row);
+		return line[x];
+	}
+
+
 
 	static void copy_a8r8g8b8_to_v8u8_linear(
 		const D3DSURFACE_DESC& surface_desc,
@@ -1038,10 +1086,10 @@ RTexture* CTextureManager::CreateRTexture(SharedTexture* pSharedTexture, Texture
 		if ((g_Device.GetDeviceCaps()->TextureCaps & D3DPTEXTURECAPS_MIPCUBEMAP) == 0)
 			nMipsToCreate = 0;
 
-		HRESULT hResult = PD3DDEVICE->CreateCubeTexture(std::max(iTexWidth,iTexHeight),nMipsToCreate,NULL,iFormat,D3DPOOL_MANAGED,&pRTexture->m_pD3DCubeTexture);
+		HRESULT hResult = PD3DDEVICE->CreateCubeTexture(max(iTexWidth,iTexHeight),nMipsToCreate,NULL,iFormat,D3DPOOL_MANAGED,&pRTexture->m_pD3DCubeTexture);
 		if (hResult != D3D_OK) 
 		{
-			AddDebugMessage(4, "Unable to create (%d) cube texture surface.", std::max(iTexWidth,iTexHeight));
+			AddDebugMessage(4, "Unable to create (%d) cube texture surface.", max(iTexWidth,iTexHeight));
 			return NULL; 
 		}
 

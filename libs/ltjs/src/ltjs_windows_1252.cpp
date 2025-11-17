@@ -138,6 +138,41 @@ ucs::CodePoint to_unicode(
 	}
 }
 
+ucs::CodePoint utf8_to_unicode(const char*& p) noexcept
+{
+	unsigned char c = static_cast<unsigned char>(*p++);
+	if (c < 0x80) {
+		// 1 byte (ASCII)
+		return c;
+	}
+	else if ((c >> 5) == 0x6) {
+		// 2 bytes
+		unsigned char c2 = static_cast<unsigned char>(*p++);
+		if ((c2 & 0xC0) != 0x80) return ucs::replacement_code_point;
+		return ((c & 0x1F) << 6) | (c2 & 0x3F);
+	}
+	else if ((c >> 4) == 0xE) {
+		// 3 bytes
+		unsigned char c2 = static_cast<unsigned char>(*p++);
+		unsigned char c3 = static_cast<unsigned char>(*p++);
+		if ((c2 & 0xC0) != 0x80 || (c3 & 0xC0) != 0x80) return ucs::replacement_code_point;
+		return ((c & 0x0F) << 12) | ((c2 & 0x3F) << 6) | (c3 & 0x3F);
+	}
+	else if ((c >> 3) == 0x1E) {
+		// 4 bytes
+		unsigned char c2 = static_cast<unsigned char>(*p++);
+		unsigned char c3 = static_cast<unsigned char>(*p++);
+		unsigned char c4 = static_cast<unsigned char>(*p++);
+		if ((c2 & 0xC0) != 0x80 || (c3 & 0xC0) != 0x80 || (c4 & 0xC0) != 0x80)
+			return ucs::replacement_code_point;
+		return ((c & 0x07) << 18) | ((c2 & 0x3F) << 12) |
+			((c3 & 0x3F) << 6) | (c4 & 0x3F);
+	}
+	else {
+		return ucs::replacement_code_point;
+	}
+}
+
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 

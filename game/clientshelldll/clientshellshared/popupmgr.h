@@ -19,7 +19,7 @@
 #include "ltbasetypes.h"
 
 
-#define POPUP_DEFAULT_FILE	"Attributes\\PopupItems.txt"
+#define POPUP_DEFAULT_FILE	"SA_SCRIPTS\\PopupItems.txt"
 #define POPUP_MAX_FILE_PATH	64
 
 

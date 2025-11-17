@@ -18,11 +18,14 @@
 #include "classbind.h"
 #include "bindmgr.h"
 #include "console.h"
+#include <filesystem>
 
 #ifdef LTJS_SDL_BACKEND
 #include "ltjs_shared_data_mgr.h"
 #include "ltjs_shell_resource_mgr.h"
 #endif // LTJS_SDL_BACKEND
+
+namespace fs = std::filesystem;
 
 
 namespace ltjs
@@ -138,7 +141,7 @@ LTSysResultString g_StringMap[] = {
 
 #ifndef LTJS_SDL_BACKEND
 static LTBOOL dsi_LoadResourceModule() {
-    g_hResourceModule = LoadLibrary("ltjs_ltmsg.dll");
+    g_hResourceModule = LoadLibrary("ltmsg.dll");
 
 #if 0
 #ifdef LITHTECH_ESD
@@ -314,7 +317,7 @@ int dsi_Init()
     dm_Init();  // Memory manager.
     str_Init(); // String manager.
     df_Init();  // File manager.
-
+    
     if (dsi_LoadResourceModule()) {
         return 0;
     }
@@ -808,18 +811,23 @@ LTRESULT dsi_InitClientShellDE()
     return LT_OK;
 }
 #else
+
+fs::path get_current_working_directory() {
+  return fs::current_path();
+}
+
 LTRESULT dsi_InitClientShellDE()
 {
-	int status;
+    int status;
 
-	g_pClientMgr->m_hClientResourceModule = nullptr;
+    g_pClientMgr->m_hClientResourceModule = nullptr;
 #ifndef LTJS_SDL_BACKEND
-	g_pClientMgr->m_hLocalizedClientResourceModule = nullptr;
+    g_pClientMgr->m_hLocalizedClientResourceModule = nullptr;
 #endif // LTJS_SDL_BACKEND
-	g_pClientMgr->m_hShellModule = nullptr;
+    g_pClientMgr->m_hShellModule = nullptr;
 
-	// Setup the cshell.dll file.
-	const auto cshell_file_name = ltjs::ul::PathUtils::append("game" , "ltjs_cshell.dll");
+    // Setup the cshell.dll file.
+	const auto cshell_file_name = ltjs::ul::PathUtils::append("game" , "cshell.dll");
 
 	//load the DLL.
 	status = bm_BindModule(cshell_file_name.c_str(), false, g_pClientMgr->m_hShellModule);
@@ -842,8 +850,8 @@ LTRESULT dsi_InitClientShellDE()
 	//
 	// Try to setup cres.dll.
 	//
-	const auto cres_file_name = ltjs::ul::PathUtils::append("game" , "ltjs_cres.dll");
-
+	const auto cres_file_name = ltjs::ul::PathUtils::append("game" , "CRes.dll");
+    
 	//load the DLL.
 	status = bm_BindModule(cres_file_name.c_str(), false, g_pClientMgr->m_hClientResourceModule);
 
@@ -857,6 +865,7 @@ LTRESULT dsi_InitClientShellDE()
 		g_pClientMgr->SetupError(LT_INVALIDSHELLDLL, cres_file_name.c_str());
 		RETURN_ERROR_PARAM(1, InitClientShellDE, LT_INVALIDSHELLDLL, cres_file_name.c_str());
 	}
+    
 #endif // LTJS_SDL_BACKEND
 
 	//let the dll know it's instance handle.

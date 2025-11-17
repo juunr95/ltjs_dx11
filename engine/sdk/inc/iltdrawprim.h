@@ -52,14 +52,39 @@
 */
 struct LT_VERTRGBA
 {
-    // convert r,g,b,a to a uint32
-    uint32 Compact() { 
-        return (((uint32)a << 24) | ((uint32)r << 16) | 
-               ((uint32)g << 8) | (uint32)b);
+    uint8 r, g, b, a;
+
+    // compact rgba in 0xRRGGBBAA format
+    uint32 Compact() const
+    {
+        return
+            ((uint32)r << 24) |
+            ((uint32)g << 16) |
+            ((uint32)b << 8) |
+            ((uint32)a);
     }
 
-    uint8 b, g, r, a;
+    // assign from packed uint32
+    LT_VERTRGBA& operator=(uint32 other)
+    {
+        r = (other >> 24) & 0xFF;
+        g = (other >> 16) & 0xFF;
+        b = (other >> 8) & 0xFF;
+        a = (other) & 0xFF;
+        return *this;
+    }
+
+    // assign from another struct
+    LT_VERTRGBA& operator=(const LT_VERTRGBA& other)
+    {
+        r = other.r;
+        g = other.g;
+        b = other.b;
+        a = other.a;
+        return *this;
+    }
 };
+
 
 // Textured gouraud shaded vertex
 /*!

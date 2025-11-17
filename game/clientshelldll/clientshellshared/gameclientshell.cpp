@@ -63,6 +63,17 @@
 #include "ltjs_system_event_handler_mgr.h"
 #endif // LTJS_SDL_BACKEND
 
+#ifdef USE_ULTRALIGHT
+#include "Ultralight\Ultralight.h"
+#include "AppCore\AppCore.h"
+#include "JavascriptCore\Javascript.h"
+
+#include "LithtechUltralightGPU.h"
+#include "LithtechUltralightLogger.h"
+
+using namespace ultralight;
+#endif // USE_ULTRALIGHT
+
 #ifdef STRICT
 	WNDPROC g_pfnMainWndProc = NULL;
 #else
@@ -917,7 +928,6 @@ uint32 CGameClientShell::OnEngineInitialized(RMode *pMode, LTGUID *pAppGuid)
 
 	*pAppGuid = GAMEGUID;
 
-
     char strTimeDiff[64];
 	float fStartTime = CWinUtil::GetTime();
 
@@ -1175,100 +1185,130 @@ uint32 CGameClientShell::OnEngineInitialized(RMode *pMode, LTGUID *pAppGuid)
 		return LT_ERROR;
 	}
 
+#ifdef USE_ULTRALIGHT
+	void* pData = nullptr;
+	g_pLTClient->GetEngineHook("d3ddevice", &pData);
+
+	m_UltralightConfig.cache_path = "./cache";
+
+	m_UltralightDriver = new LithtechUltralightGPU((IDirect3DDevice9*)pData);
+	Platform::instance().set_config(m_UltralightConfig);
+	Platform::instance().set_gpu_driver((GPUDriver*)m_UltralightDriver);
+	Platform::instance().set_font_loader(GetPlatformFontLoader());
+	Platform::instance().set_logger(LithtechUltraligthLogger::create("ultralight.log"));
+	Platform::instance().set_file_system(GetPlatformFileSystem("."));
+
+	m_pUltralightRenderer = Renderer::Create();
+
+	ViewConfig view_config;
+	view_config.is_accelerated = true;
+	view_config.is_transparent = true;
+
+	m_pUltralightView = m_pUltralightRenderer->CreateView(800, 600, view_config, nullptr);
+
+	m_pUltralightView->LoadHTML(R"(
+  <body style='background:#222;color:#00;font-family:sans-serif'>
+    <div style='width: 800px; height: 600px'>
+	  <h1>Ultralight Initialized!</h1>
+	  <p>If you can see this, Ultralight has been successfully initialized.</p>
+	</div>
+  </body>
+)");
+#endif
 	m_bQuickSave = false;
 
 	// Get the name of the mod we want to play.  If no mod specified then we consider that the 'Retail' mod...
 	// Set this when the game initializes and use g_pClientMultiplayerMgr->GetModName() in case the console var changes.
 
-	HCONSOLEVAR	hModVar = g_pLTClient->GetConsoleVar( "Mod" );
-	if( hModVar )
+	HCONSOLEVAR	hModVar = g_pLTClient->GetConsoleVar("Mod");
+	if (hModVar)
 	{
-        g_pClientMultiplayerMgr->SetModName( g_pLTClient->GetVarValueString( hModVar) );
+		g_pClientMultiplayerMgr->SetModName(g_pLTClient->GetVarValueString(hModVar));
 	}
 	else
 	{
-		g_pClientMultiplayerMgr->SetModName( LoadTempString( IDS_RETAIL ) );
-	}	
+		g_pClientMultiplayerMgr->SetModName(LoadTempString(IDS_RETAIL));
+	}
 
 	// Process command line.
 
 	if (hVar = g_pLTClient->GetConsoleVar("join")) // looking for join [ip] format
 	{
-		g_pInterfaceMgr->SetCommandLineJoin( true );
+		g_pInterfaceMgr->SetCommandLineJoin(true);
 
 		// Change to the splash screen.  We'll start the game after that.
-		GetInterfaceMgr( )->ChangeState(GS_SPLASHSCREEN);
+		GetInterfaceMgr()->ChangeState(GS_SPLASHSCREEN);
 	}
 	else if (hVar = g_pLTClient->GetConsoleVar("host")) // looking for host [1] format
 	{
-		int nHost = atoi(g_pLTClient->GetVarValueString( hVar ));
-		
+		int nHost = atoi(g_pLTClient->GetVarValueString(hVar));
+
 		// Use the settings from the current profile to determine what the game will be...
 
-		CUserProfile *pProfile = g_pProfileMgr->GetCurrentProfile( );
-		if( nHost && pProfile )
+		CUserProfile* pProfile = g_pProfileMgr->GetCurrentProfile();
+		if (nHost && pProfile)
 		{
 			bool bOk = true;
 
 			// Initialize the mission mgr with the appropriate file based on game type...
 
 			std::string sMissionFile;
-			switch( pProfile->m_ServerGameOptions.m_eGameType )
+			switch (pProfile->m_ServerGameOptions.m_eGameType)
 			{
-				case eGameTypeCooperative:
-				{
-					sMissionFile = MISSION_COOP_FILE;
-				}
-				break;
+			case eGameTypeCooperative:
+			{
+				sMissionFile = MISSION_COOP_FILE;
+			}
+			break;
 
-				case eGameTypeDeathmatch:
-				case eGameTypeTeamDeathmatch:
-				{
-					sMissionFile = MISSION_DM_FILE;
-				}
-				break;
+			case eGameTypeDeathmatch:
+			case eGameTypeTeamDeathmatch:
+			{
+				sMissionFile = MISSION_DM_FILE;
+			}
+			break;
 
-				case eGameTypeDoomsDay:
-				{
-					sMissionFile = MISSION_DD_FILE;
-				}
-				break;
+			case eGameTypeDoomsDay:
+			{
+				sMissionFile = MISSION_DD_FILE;
+			}
+			break;
 
-				case eGameTypeSingle:
-				default:
-				{
-					sMissionFile = MISSION_DEFAULT_FILE;
-					bOk = false;
-				}
-				break;
+			case eGameTypeSingle:
+			default:
+			{
+				sMissionFile = MISSION_DEFAULT_FILE;
+				bOk = false;
+			}
+			break;
 			}
 
-			if( !g_pMissionButeMgr->Init( sMissionFile.c_str() ))
+			if (!g_pMissionButeMgr->Init(sMissionFile.c_str()))
 			{
-				g_pLTClient->ShutdownWithMessage("Could not load mission bute %s.", sMissionFile.c_str() );
+				g_pLTClient->ShutdownWithMessage("Could not load mission bute %s.", sMissionFile.c_str());
 				return LT_ERROR;
 			}
 
 			// Start the server..
 
-			bOk = bOk && g_pClientMultiplayerMgr->SetupServerHost( pProfile->m_ServerGameOptions.m_nPort , pProfile->m_ServerGameOptions.m_bLANOnly );
+			bOk = bOk && g_pClientMultiplayerMgr->SetupServerHost(pProfile->m_ServerGameOptions.m_nPort, pProfile->m_ServerGameOptions.m_bLANOnly);
 			bOk = bOk && g_pMissionMgr->StartGameNew();
-			
-			if( !bOk )
+
+			if (!bOk)
 			{
 				// drop them into the host menu
-				GetInterfaceMgr( )->LoadFailed();
-				GetInterfaceMgr( )->SwitchToScreen(SCREEN_ID_HOST);
+				GetInterfaceMgr()->LoadFailed();
+				GetInterfaceMgr()->SwitchToScreen(SCREEN_ID_HOST);
 
 				MBCreate mb;
-				GetInterfaceMgr( )->ShowMessageBox(IDS_NOLOADLEVEL,&mb);
+				GetInterfaceMgr()->ShowMessageBox(IDS_NOLOADLEVEL, &mb);
 			}
 		}
 		else
 		{
 			// Just treat like normal game...
-			
-			GetInterfaceMgr( )->ChangeState(GS_SPLASHSCREEN);
+
+			GetInterfaceMgr()->ChangeState(GS_SPLASHSCREEN);
 		}
 	}
 	else if (hVar = g_pLTClient->GetConsoleVar("runworld"))
@@ -1281,34 +1321,33 @@ uint32 CGameClientShell::OnEngineInitialized(RMode *pMode, LTGUID *pAppGuid)
 		}
 
 		// Initialize to the sp mission bute.
-		if( !g_pMissionButeMgr->Init( MISSION_DEFAULT_FILE ))
+		if (!g_pMissionButeMgr->Init(MISSION_DEFAULT_FILE))
 		{
-			g_pLTClient->ShutdownWithMessage("Could not load mission bute %s.", MISSION_DEFAULT_FILE );
+			g_pLTClient->ShutdownWithMessage("Could not load mission bute %s.", MISSION_DEFAULT_FILE);
 			return LT_ERROR;
-  		}
+		}
 
-		g_pClientSaveLoadMgr->SetUseMultiplayerFolders( false );
-		bool bOk = g_pClientMultiplayerMgr->SetupServerSinglePlayer( );
+		g_pClientSaveLoadMgr->SetUseMultiplayerFolders(false);
+		bool bOk = g_pClientMultiplayerMgr->SetupServerSinglePlayer();
 		bOk = bOk && g_pMissionMgr->StartGameFromLevel(pMap);
-		if( !bOk )
+		if (!bOk)
 		{
 			g_pLTClient->ShutdownWithMessage(LoadTempString(IDS_NOLOADLEVEL));
 			return LT_ERROR;
 		}
 	}
-	else if (GetConsoleInt("skiptitle",0))
+	else if (GetConsoleInt("skiptitle", 0))
 	{
-		GetInterfaceMgr( )->SwitchToScreen(SCREEN_ID_MAIN);
+		GetInterfaceMgr()->SwitchToScreen(SCREEN_ID_MAIN);
 	}
 	else
 	{
-		GetInterfaceMgr( )->ChangeState(GS_SPLASHSCREEN);
+		GetInterfaceMgr()->ChangeState(GS_SPLASHSCREEN);
 	}
 
 #ifdef _TO2DEMO
-	WriteConsoleInt( "ConsoleEnable", 0 );
+	WriteConsoleInt("ConsoleEnable", 0);
 #endif // _TO2DEMO
-
 
 	// Determine how long it took to initialize the game...
 	sprintf(strTimeDiff, "Game initialized in %f seconds.\n", CWinUtil::GetTime() - fStartTime);
@@ -1589,6 +1628,8 @@ void CGameClientShell::PreUpdate()
 {
 	GetPlayerMgr()->PreUpdate();
 	GetInterfaceMgr( )->PreUpdate();
+
+	m_pUltralightRenderer->Update();
 }
 
 // ----------------------------------------------------------------------- //
@@ -1601,6 +1642,11 @@ void CGameClientShell::PreUpdate()
 
 void CGameClientShell::Update()
 {
+	m_pUltralightRenderer->RefreshDisplay(0);
+	m_pUltralightRenderer->Render();
+
+	m_UltralightDriver->Render();
+
 	// Allow multiplayermgr to update.
 	g_pClientMultiplayerMgr->Update( );
 
@@ -1616,8 +1662,6 @@ void CGameClientShell::Update()
 
 	UpdateScreenFlash();
 	m_ScreenTintMgr.Update();
-
-
 
 	// Update client-side physics structs...
 
@@ -2671,7 +2715,7 @@ void CGameClientShell::PauseGame(bool bPause, bool bPauseSound)
 {
 	m_bGamePaused = bPause;
 
-	g_pPaused->Show(!!bPause);
+	//g_pPaused->Show(!!bPause);
 
 	GetInterfaceMgr()->GetFullScreenTint()->TurnOn(m_bGamePaused);
 

@@ -60,7 +60,7 @@ struct CCollective_Template;
 //
 // MACROS:
 //
-#define RELATION_FILE "Attributes\\RelationData.txt"
+#define RELATION_FILE "SA_SCRIPTS\\RelationData.txt"
 
 
 struct RelationUser_Template

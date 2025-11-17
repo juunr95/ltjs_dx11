@@ -21,7 +21,7 @@ struct ObjectCreateStruct;
 class CPropTypeMgr;
 extern CPropTypeMgr* g_pPropTypeMgr;
 
-#define PTMGR_DEFAULT_FILE		"Attributes\\PropTypes.txt"
+#define PTMGR_DEFAULT_FILE		"SA_SCRIPTS\\PropTypes.txt"
 #define PTMGR_INVALID_ID		-1
 
 #define PROPTYPE_MAX_NAME_LENGTH		32

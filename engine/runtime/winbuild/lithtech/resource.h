@@ -1,8 +1,9 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by lithtech.rc
+// Arquivo de inclusão gerado pelo Microsoft Visual C++.
+// Usado por lithtech.rc
 //
 #define IDM_ABOUTBOX                    0x0010
+#define IDC_POINTER                     104
 #define IDR_MAINFRAME                   128
 #define IDD_DIALOG1                     136
 #define IDD_BRAND                       137

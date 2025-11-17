@@ -230,7 +230,7 @@ bool CClientFXDB::LoadFxDll()
 	UnloadFxDll();
 
 	// Load the library
-	const char *sName = "ltjs_clientfx.dll";
+	const char *sName = "clientfx.dll";
 	char sTmp[MAX_PATH + 1];
 	LTSNPrintF(sTmp, sizeof(sTmp), "Game\\%s", sName);
 

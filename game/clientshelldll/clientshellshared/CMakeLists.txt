@@ -167,6 +167,7 @@ target_sources (
 		lightscalemgr.h
 		linesystemfx.h
 		loadingscreen.h
+		LithtechUltralightGPU.h
 		marksfx.h
 		menuenum.h
 		menuintel.h
@@ -402,6 +403,7 @@ target_sources (
 		lightscalemgr.cpp
 		linesystemfx.cpp
 		loadingscreen.cpp
+		LithtechUltralightGPU.cpp
 		marksfx.cpp
 		menuintel.cpp
 		menuinventory.cpp

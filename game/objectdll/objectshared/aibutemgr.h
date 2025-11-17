@@ -283,7 +283,7 @@ class CAIButeMgr : public CGameButeMgr
 		CAIButeMgr();
 		~CAIButeMgr();
 
-		LTBOOL		Init(const char* szAttributeFile = "Attributes\\AIButes.txt");
+		LTBOOL		Init(const char* szAttributeFile = "SA_SCRIPTS\\AIButes.txt");
 		void		Term();
 
 		// Templates

@@ -199,18 +199,6 @@ LTBOOL CTO2InterfaceMgr::OnCommandOn(int command)
 
 LTBOOL CTO2InterfaceMgr::OnKeyDown(int key, int rep)
 {
-	//handle stuff before default handling
-#ifdef LTJS_SDL_BACKEND
-	if (g_pRadio->IsVisible() && m_eGameState == GS_PLAYING && key == ::SDLK_ESCAPE)
-#else
-	if (g_pRadio->IsVisible() && m_eGameState == GS_PLAYING && key == VK_ESCAPE)
-#endif // LTJS_SDL_BACKEND
-	{
-		g_pRadio->Show(false);
-		g_pClientSoundMgr->PlayInterfaceSound("Interface\\Snd\\RadioOff.wav");
-		return LTTRUE;
-	}
-
 	//default handling
 	if (CInterfaceMgr::OnKeyDown(key, rep))
 		return LTTRUE;

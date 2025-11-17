@@ -28,7 +28,7 @@
 // Defines...
 //
 
-	#define SOUND_BUTES_DEFAULT_FILE	"Attributes\\SoundButes.txt"
+	#define SOUND_BUTES_DEFAULT_FILE	"SA_SCRIPTS\\SoundButes.txt"
 	#define SOUND_BUTES_STRING_SIZE		64
 	#define INVALID_SOUND_BUTE			-1
 

@@ -392,6 +392,8 @@ LTBOOL CBaseScreen::Render(HSURFACE hDestSurf)
         return LTFALSE;
 	}
 
+	this->SetPolyRenderState();
+
 	LTIntPt tmpPos;
 
 	// Render the title

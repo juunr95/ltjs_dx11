@@ -18,7 +18,7 @@
 class CClientSoundMgr;
 extern CClientSoundMgr* g_pClientSoundMgr;
 
-#define CSNDMGR_DEFAULT_FILE		"Attributes\\ClientSnd.txt"
+#define CSNDMGR_DEFAULT_FILE		"SA_SCRIPTS\\ClientSnd.txt"
 
 class CClientSoundMgr : public CGameSoundMgr
 {

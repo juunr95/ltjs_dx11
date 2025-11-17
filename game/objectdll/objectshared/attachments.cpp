@@ -2099,7 +2099,7 @@ LTRESULT CAttachmentsPlugin::PreHook_EditStringList(const char* szRezPath, const
 	if ( !sm_bInitted )
 	{
 		char szFile[256];
-		sprintf(szFile, "%s\\Attributes\\Attachments.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\Attachments.txt", szRezPath);
 		sm_AttachButeMgr.SetInRezFile(LTFALSE);
         sm_AttachButeMgr.Init(szFile);
 		sm_bInitted = LTTRUE;

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30110.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_dshow", "Engine\libs\Lib_DShow\lib_dshow.vcxproj", "{0BC75469-6DD7-4B39-81A3-9B51CC685A22}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_dshow", "engine\libs\Lib_DShow\lib_dshow.vcxproj", "{0BC75469-6DD7-4B39-81A3-9B51CC685A22}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_lt_mem", "Engine\libs\ltmem\lib_lt_mem.vcxproj", "{746AA05C-85DF-4D10-9BED-7E028ACBB50D}"
 EndProject

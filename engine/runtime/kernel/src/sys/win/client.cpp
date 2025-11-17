@@ -19,7 +19,6 @@
 #include "ltjs_sdl_utils.h"
 #endif // LTJS_SDL_BACKEND
 
-
 #ifdef LITHTECH_ESD
 #include "ltrealaudio_impl.h"
 #include "ltrealvideo_impl.h"
@@ -523,14 +522,14 @@ bool initialize()
 	auto& shared_data_mgr = ltjs::get_shared_data_mgr();
 
 	g_language_mgr = ltjs::make_language_mgr();
-	g_language_mgr->initialize("ltjs");
+	g_language_mgr->initialize("game");
 	ltjs::get_shared_data_mgr().set_language_mgr(g_language_mgr.get());
 
 	g_cres_mgr = ltjs::make_shell_resource_mgr();
 	ltjs::get_shared_data_mgr().set_cres_mgr(g_cres_mgr.get());
 
 	g_ltmsg_mgr = ltjs::make_shell_resource_mgr();
-	g_ltmsg_mgr->initialize("ltjs/ltmsg");
+	g_ltmsg_mgr->initialize("game");
 	g_ltmsg_mgr->set_language(g_language_mgr->get_current()->id_string.data);
 	ltjs::get_shared_data_mgr().set_ltmsg_mgr(g_ltmsg_mgr.get());
 #endif // LTJS_SDL_BACKEND
@@ -1088,7 +1087,7 @@ int RunClientApp(HINSTANCE hInstance) {
     status = dsi_Init();
     if (status != 0) {
         if (status == 1) {
-            MessageBox(LTNULL, "Unable to load ltjs_ltmsg.dll.", "Error", MB_OK);
+            MessageBox(LTNULL, "Unable to load ltmsg.dll.", "Error", MB_OK);
             dsi_Term();
             return -1;
         }

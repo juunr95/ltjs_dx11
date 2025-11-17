@@ -19,7 +19,7 @@
 #include "ltbasetypes.h"
 
 
-#define SI_DEFAULT_FILE		"Attributes\\SearchItems.txt"
+#define SI_DEFAULT_FILE		"SA_SCRIPTS\\SearchItems.txt"
 #define SI_MAX_NAME			32
 #define SI_MAX_FILE_PATH	64
 #define SI_MAX_ITEMS		64

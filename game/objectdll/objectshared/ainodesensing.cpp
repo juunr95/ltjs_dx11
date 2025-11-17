@@ -628,7 +628,7 @@ LTRESULT AINodeSensingPlugin::PreHook_EditStringList(const char* szRezPath, cons
 		// Make sure the weaponmgr plugin is inited.
 		m_WeaponMgrPlugin.PreHook_EditStringList(szRezPath, szPropName, aszStrings, pcStrings, cMaxStrings, cMaxStringLength);
 
-		sprintf(szFile, "%s\\Attributes\\AIButes.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\AIButes.txt", szRezPath);
 		s_AIButeMgr.SetInRezFile(LTFALSE);
 		s_AIButeMgr.Init(szFile);
 

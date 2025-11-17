@@ -31,7 +31,7 @@
 // Defines...
 //
 
-	#define TTMGR_DEFAULT_FILE		"Attributes\\TriggerTypes.txt"
+	#define TTMGR_DEFAULT_FILE		"SA_SCRIPTS\\TriggerTypes.txt"
 	#define TTMGR_INVALID_ID		-1
 	#define	TTMGR_MAX_NAME_LENGTH	32
 	#define TTMGR_MAX_FILE_PATH		128

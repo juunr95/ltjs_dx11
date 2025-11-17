@@ -179,7 +179,7 @@ void CAISpatialRepresentationMgr::SetupInstanceArray(const char* const szClass)
 	}
 }
 
-struct SetupNeighbors : public std::binary_function< AISpatialRepresentation*, CAISpatialRepresentationMgr*, bool >
+struct SetupNeighbors : public std::function< AISpatialRepresentation* >
 {
 	bool operator() ( AISpatialRepresentation* pVolume, CAISpatialRepresentationMgr* VolumeMgr ) const
 	{
@@ -214,14 +214,14 @@ void CAISpatialRepresentationMgr::Init(const char* const szClass)
 	std::for_each(
 		m_listpVolumes.begin(),
 		m_listpVolumes.end(),
-		std::mem_fun( &AISpatialRepresentation::Init ) );
+		std::mem_fn( &AISpatialRepresentation::Init ) );
 
 	// Build the neighboring connections
 
 	std::for_each(
 		m_listpVolumes.begin(),
 		m_listpVolumes.end(),
-		std::bind2nd( SetupNeighbors(), this ) );
+		std::bind( SetupNeighbors(), this ) );
 
 	m_bInitialized = LTTRUE;
 }
@@ -690,7 +690,7 @@ void CAISpatialRepresentationMgr::DrawVolumes()
 	std::for_each(
 		GetContainer()->begin(),
 		GetContainer()->end(),
-		std::mem_fun( &AISpatialRepresentation::DrawSelf ));
+		std::mem_fn( &AISpatialRepresentation::DrawSelf ));
 
 	m_bDrawingVolumes = LTTRUE;
 }
@@ -707,7 +707,7 @@ void CAISpatialRepresentationMgr::HideVolumes()
 	std::for_each(
 		GetContainer()->begin(),
 		GetContainer()->end(),
-		std::mem_fun( &AISpatialRepresentation::HideSelf ));
+		std::mem_fn( &AISpatialRepresentation::HideSelf ));
 
 	m_bDrawingVolumes = LTFALSE;
 }

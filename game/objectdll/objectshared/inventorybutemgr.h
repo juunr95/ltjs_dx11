@@ -16,7 +16,7 @@
 #include "generalinventory.h"
 
 // Defines
-#define INVENTORY_FILE			"Attributes\\Inventory.txt"
+#define INVENTORY_FILE			"SA_SCRIPTS\\Inventory.txt"
 
 // Forward declarations.
 class  CInventoryButeMgr;

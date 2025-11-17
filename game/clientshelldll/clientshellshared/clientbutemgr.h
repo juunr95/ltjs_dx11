@@ -15,7 +15,7 @@
 #include "ltbasetypes.h"
 
 
-#define CBMGR_DEFAULT_FILE "Attributes\\ClientButes.txt"
+#define CBMGR_DEFAULT_FILE "SA_SCRIPTS\\ClientButes.txt"
 
 class CClientButeMgr;
 extern CClientButeMgr* g_pClientButeMgr;

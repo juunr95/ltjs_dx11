@@ -27,6 +27,8 @@ code_page::Result from_unicode(
 ucs::CodePoint to_unicode(
 	char ch) noexcept;
 
+ucs::CodePoint utf8_to_unicode(
+	const char*& p) noexcept;
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 

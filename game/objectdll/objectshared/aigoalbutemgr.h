@@ -32,7 +32,7 @@ extern CAIGoalButeMgr* g_pAIGoalButeMgr;
 // MACROS:
 //
 #define MAX_GOAL_NAME_LEN	32
-#define GOAL_FILE			"Attributes\\AIGoals.txt"
+#define GOAL_FILE			"SA_SCRIPTS\\AIGoals.txt"
 
 
 //

@@ -17,7 +17,7 @@
 #include "gamebutemgr.h"
 #include <bitset>
 
-#define DTMGR_DEFAULT_FILE		"Attributes\\DamageTypes.txt"
+#define DTMGR_DEFAULT_FILE		"SA_SCRIPTS\\DamageTypes.txt"
 
 typedef uint64 DamageFlags;
 

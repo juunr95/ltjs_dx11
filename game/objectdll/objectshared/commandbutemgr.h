@@ -31,7 +31,7 @@
 // Defines...
 //
 
-	#define CBMGR_DEFAULT_FILE			"Attributes\\Commands.txt"
+	#define CBMGR_DEFAULT_FILE			"SA_SCRIPTS\\Commands.txt"
 	#define CBMGR_MAX_COMMAND_LENGTH	256
 
 

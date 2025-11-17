@@ -32,7 +32,7 @@
 // Defines...
 //
 
-	#define	GTMGR_DEFAULT_FILE		"Attributes\\GadgetTargets.txt"
+	#define	GTMGR_DEFAULT_FILE		"SA_SCRIPTS\\GadgetTargets.txt"
 	#define	GTMGR_INVALID_ID		-1
 	#define GTMGR_MAX_NAME_LENGTH	32
 	#define GTMGR_MAX_FILE_PATH		64

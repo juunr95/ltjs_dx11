@@ -1036,7 +1036,7 @@ LTBOOL CWeaponMgr::WriteFile()
 
 	// Save the file...
 
-	LTBOOL bRet = m_buteMgr.Save(); // "Game\\Attributes\\Weapons.txt");
+	LTBOOL bRet = m_buteMgr.Save(); // "Game\\SA_SCRIPTS\\Weapons.txt");
 	m_buteMgr.Term();
 
 

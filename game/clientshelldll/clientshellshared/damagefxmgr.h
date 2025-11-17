@@ -27,7 +27,7 @@
 // Defins...
 //
 
-	#define DMGFXMGR_DEFAULT_FILE			"Attributes\\DamageFX.txt"
+	#define DMGFXMGR_DEFAULT_FILE			"SA_SCRIPTS\\DamageFX.txt"
 	#define DMGFXMGR_MAX_NAME_LEN	32
 	#define DMGFXMGR_MAX_PATH		64
 	#define DMGFXMGR_INVALID_ID		-1

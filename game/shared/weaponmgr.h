@@ -61,8 +61,8 @@ extern CWeaponMgr* g_pWeaponMgr;
 #define WEAPON_KEY_SHOW_PVATTACHMENT		"SHOW_PVATTACHMENT" // usage: SHOW_PVATTACHMENT <index of a PlayerViewAttachment>
 
 
-#define WEAPON_DEFAULT_FILE					"Attributes\\Weapons.txt"
-#define WEAPON_DEFAULT_MULTI_FILE			"Attributes\\mp_weapons.txt"
+#define WEAPON_DEFAULT_FILE					"SA_SCRIPTS\\Weapons.txt"
+#define WEAPON_DEFAULT_MULTI_FILE			"SA_SCRIPTS\\mp_weapons.txt"
 
 #define WMGR_INVALID_ID						255
 

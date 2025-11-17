@@ -31,7 +31,7 @@ struct PROJECTILEFX;
 class CFXButeMgr;
 extern CFXButeMgr* g_pFXButeMgr;
 
-#define FXBMGR_DEFAULT_FILE			"Attributes\\Fx.txt"
+#define FXBMGR_DEFAULT_FILE			"SA_SCRIPTS\\Fx.txt"
 
 #define FXBMGR_INVALID_ID			255
 

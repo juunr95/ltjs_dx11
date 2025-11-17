@@ -1323,7 +1323,7 @@ try
 {
 	for (const auto& path : context.paths)
 	{
-		const auto script_path = path / "cursors.txt";
+		const auto script_path = path / "SA_SCRIPTS\\cursors.txt";
 		append_cursors(context, script_path);
 	}
 

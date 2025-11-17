@@ -17,7 +17,7 @@ class CAttachButeMgr : public CGameButeMgr
 		CAttachButeMgr();
 		~CAttachButeMgr();
 
-        LTBOOL       Init(const char* szAttributeFile = "Attributes\\Attachments.txt");
+        LTBOOL       Init(const char* szAttributeFile = "SA_SCRIPTS\\Attachments.txt");
 		void		Term();
 
 		// Attachments

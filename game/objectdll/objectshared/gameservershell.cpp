@@ -1164,7 +1164,7 @@ void CGameServerShell::ProcessHandshake(HCLIENT hClient, ILTMessage_Read *pMsg)
 #endif
 
 			// CRC the damagefx.txt
-			static uint32 nDamageFxCRC = CRC32::CalcRezFileCRC( "attributes\\damagefx.txt" );
+			static uint32 nDamageFxCRC = CRC32::CalcRezFileCRC( "SA_SCRIPTS\\damagefx.txt" );
 			uint32 nDamageFxMaskedCRC = nDamageFxCRC ^ nXORMask;
             static_cast<void>(nDamageFxMaskedCRC);
 			uint32 nClientDamageFxCRC = pMsg->Readuint32();

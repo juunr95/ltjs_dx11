@@ -25,7 +25,7 @@ class CServerButeMgr : public CGameButeMgr
 		CServerButeMgr();
 		~CServerButeMgr();
 
-        LTBOOL       Init(const char* szAttributeFile="Attributes\\ServerButes.txt");
+        LTBOOL       Init(const char* szAttributeFile="SA_SCRIPTS\\ServerButes.txt");
 		void		Term();
 
         LTBOOL       WriteFile() { return m_buteMgr.Save(); }

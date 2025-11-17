@@ -19,10 +19,11 @@
     <ProjectGuid>{24CA0D6C-5D79-4346-A73B-92E350414832}</ProjectGuid>
     <SccProjectName />
     <SccLocalPath />
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -148,7 +149,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\DirectX\Include;..\..\..\..\libs\stdlith;..\..\..\..\libs\lith;..\..\..\libs\rezmgr;..\..\controlfilemgr;..\..\crtcompat;..\..\lithtemplate;.;..\..\client\src;..\..\kernel\mem\src;..\..\kernel\io\src;..\..\kernel\src;..\..\kernel\src\sys\win;..\..\model\src;..\..\sound\src;..\..\server\src;..\..\shared\src\sys\win;..\..\shared\src;..\..\world\src;..\..\..\sdk\inc;..\..\..\sdk\inc\compat;..\..\kernel\net\src;..\..\render_b\src;..\..\mpm\src;..\..\comm\src;..\..\ui\src;..\..\distrobj\src;..\..\state_mgr\src;..\..\physics\src;..\..\render_a\src\sys\d3d;..\..\..\sdk\inc\physics;..\..\..\sdk\inc\state_mgr;..\..\..\..\libs\mfcstub;..\..\..\libs\Lib_DShow;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\DirectX\Include;..\..\..\..\libs\stdlith;..\..\..\..\libs\lith;..\..\..\libs\rezmgr;..\..\controlfilemgr;..\..\crtcompat;..\..\lithtemplate;.;..\..\client\src;..\..\kernel\mem\src;..\..\kernel\io\src;..\..\kernel\src;..\..\kernel\src\sys\win;..\..\model\src;..\..\sound\src;..\..\server\src;..\..\shared\src\sys\win;..\..\shared\src;..\..\world\src;..\..\..\sdk\inc;..\..\..\sdk\inc\compat;..\..\kernel\net\src;..\..\render_b\src;..\..\mpm\src;..\..\comm\src;..\..\ui\src;..\..\distrobj\src;..\..\state_mgr\src;..\..\physics\src;..\..\render_a\src\sys\d3d;..\..\..\sdk\inc\physics;..\..\..\sdk\inc\state_mgr;..\..\..\..\libs\mfcstub;..\..\..\libs\Lib_DShow;..\..\..\..\libs\bibendovsky_spul_lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_ITERATOR_DEBUG_LEVEL=0;DE_LOCAL_SERVERBIND;DE_CLIENT_COMPILE;DSNDMGR_NO_MFC;DIRECTENGINE_COMPILE;__D3D;__D3DREND;MODEL_SUPPORT_ABC;WIN32;_WINDOWS;D3D_DEBUG_INFO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

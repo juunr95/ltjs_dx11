@@ -31,7 +31,7 @@
 // Defines...
 //
 
-	#define	RTMGR_DEFAULT_FILE		"Attributes\\RadarTypes.txt"
+	#define	RTMGR_DEFAULT_FILE		"SA_SCRIPTS\\RadarTypes.txt"
 	#define RTMGR_INVALID_ID		-1
 	#define RTMGR_MAX_NAME_LENGTH	32
 	#define RTMGR_MAX_FILE_PATH		64

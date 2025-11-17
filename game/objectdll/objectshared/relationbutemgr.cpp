@@ -75,7 +75,7 @@ struct DeleteMomentoWithoutCallback
 };
 
 struct Momento_RelationData_Equality :
-std::binary_function<RelationMomento*, const RelationDescription* const, bool>
+std::function<RelationMomento*>
 {
 	bool operator() (RelationMomento* pMomento,
 		const RelationDescription* const pRD) const
@@ -87,7 +87,7 @@ std::binary_function<RelationMomento*, const RelationDescription* const, bool>
 };
 
 struct ORMMatchesDescription :
-public std::binary_function< RelationMomento*, CObjectRelationMgr*, bool>
+public std::function< RelationMomento*>
 {
 	bool operator()( RelationMomento* pMomento, const CObjectRelationMgr* const pORM ) const
 	{
@@ -871,7 +871,7 @@ int CRelationUser::Save(ILTMessage_Write *pMsg)
 	// Save each of the Active Relationships
 	std::for_each( m_Momentos.begin(),
 		m_Momentos.end(),
-        std::bind2nd(std::mem_fun(&RelationMomento::Save), pMsg));
+        std::bind(std::mem_fn(&RelationMomento::Save), pMsg));
 
 	SAVE_TIME( m_flTimeRelationsLast );
 
@@ -990,7 +990,7 @@ bool CRelationUser::HasMatchingRelationMomento(const RelationDescription& RD) co
 	_listMomentos::const_iterator itFound = std::find_if(
 		m_Momentos.begin(),
 		m_Momentos.end(),
-		std::bind2nd( Momento_RelationData_Equality(), &InstRD )
+		std::bind( Momento_RelationData_Equality(), &InstRD )
 		);
 
 	// If we are not at the end, then we did find a matching momento, so return
@@ -1009,7 +1009,7 @@ bool CRelationUser::HasMatchingRelationMomento(const RelationDescription& RD) co
 void CRelationUser::RemoveRelation(const RelationDescription& RD)
 {
 	RelationDescription InstRD = RD;
-	_listMomentos::iterator itFound = std::find_if( m_Momentos.begin(), m_Momentos.end(), std::bind2nd( Momento_RelationData_Equality(), &InstRD ) );
+	_listMomentos::iterator itFound = std::find_if( m_Momentos.begin(), m_Momentos.end(), std::bind( Momento_RelationData_Equality(), &InstRD ) );
 	AIASSERT( itFound != m_Momentos.end(), NULL, "Attempted to remove relation momento which does not exist in list" );
 
 	// Delete the momento, then remove it from the list.
@@ -1056,7 +1056,7 @@ void CRelationUser::ResetRelationTime(CObjectRelationMgr* pORM)
 	_listMomentos::const_iterator it = std::find_if(
 		m_Momentos.begin(),
 		m_Momentos.end(),
-		std::bind2nd( ORMMatchesDescription(), pORM)  );
+		std::bind( ORMMatchesDescription(), pORM)  );
 
 	if ( it != m_Momentos.end() )
 	{
@@ -1098,7 +1098,7 @@ void CRelationUser::Update(bool bCanRemoveExpiredRelations)
 
 
 struct SyncObjectRelationMgr :
-public std::binary_function<RelationMomento*, CObjectRelationMgr*, bool>
+public std::function<RelationMomento*>
 {
 	bool operator()(RelationMomento* pMomento, CObjectRelationMgr* pObjectRelationMgr) const
 	{
@@ -1122,7 +1122,7 @@ void CRelationUser::Sync(const CObjectRelationMgr* pObjectRelationMgr)
 {
 	CObjectRelationMgr *pTakeIt = const_cast<CObjectRelationMgr*>(pObjectRelationMgr);
 	std::for_each(m_Momentos.begin(), m_Momentos.end(),
-		std::bind2nd( SyncObjectRelationMgr(), pTakeIt));
+		std::bind( SyncObjectRelationMgr(), pTakeIt));
 
 	m_Momentos.remove_if( MomentoIsNull() );
 }

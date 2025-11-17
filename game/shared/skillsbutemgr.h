@@ -15,7 +15,7 @@
 #include "gamebutemgr.h"
 #include "ltbasetypes.h"
 
-#define SMGR_DEFAULT_FILE		"Attributes\\Skills.txt"
+#define SMGR_DEFAULT_FILE		"SA_SCRIPTS\\Skills.txt"
 
 enum eSkill
 {

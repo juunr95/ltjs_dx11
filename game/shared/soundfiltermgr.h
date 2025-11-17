@@ -19,7 +19,7 @@
 class CSoundFilterMgr;
 extern CSoundFilterMgr* g_pSoundFilterMgr;
 
-#define SFM_DEFAULT_FILE		"Attributes\\SoundFilters.txt"
+#define SFM_DEFAULT_FILE		"SA_SCRIPTS\\SoundFilters.txt"
 #define SFM_INVALID_ID		-1
 
 #define SFM_MAX_NAME_LENGTH		32

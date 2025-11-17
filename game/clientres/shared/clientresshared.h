@@ -137,7 +137,7 @@
 #define IDS_PROFILE_LIST                627
 #define IDS_RESUME                      628
 #define IDS_CONTINUE_GAME               629
-#define IDC_POINTER                     630
+#define IDC_POINTER                     104
 #define IDS_TEAM_MODEL                  630
 #define IDS_GAMMA                       631
 #define IDS_HEADBOB                     632

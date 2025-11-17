@@ -418,7 +418,7 @@ LTRESULT AINodePlugin::PreHook_EditStringList(const char* szRezPath, const char*
 	if ( !s_RelationButeMgr.IsInitialized() )
 	{
 		char szFile[256];
-		sprintf(szFile, "%s\\Attributes\\RelationData.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\RelationData.txt", szRezPath);
 		s_RelationButeMgr.SetInRezFile(LTFALSE);
 	    s_RelationButeMgr.Init(szFile);
 	}
@@ -1602,7 +1602,7 @@ LTRESULT AINodeUseObjectPlugin::PreHook_EditStringList(const char* szRezPath, co
 	if ( g_pAIGoalButeMgr == LTNULL )
 	{
 		char szFile[256];
-		sprintf(szFile, "%s\\Attributes\\AIGoals.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\AIGoals.txt", szRezPath);
 		s_AIGoalButeMgr.SetInRezFile(LTFALSE);
 	    s_AIGoalButeMgr.Init(szFile);
 	}
@@ -2189,7 +2189,7 @@ class AINodeObstructPlugin : public IObjectPlugin
 			if ( !sm_bInitted )
 			{
 				char szFile[256];
-				sprintf(szFile, "%s\\Attributes\\Attachments.txt", szRezPath);
+				sprintf(szFile, "%s\\SA_SCRIPTS\\Attachments.txt", szRezPath);
 				sm_bInitted = LTTRUE;
 				sm_WeaponMgrPlugin.PreHook_EditStringList(szRezPath, szPropName, aszStrings, pcStrings, cMaxStrings, cMaxStringLength);
 			}

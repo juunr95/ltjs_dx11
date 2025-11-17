@@ -4830,7 +4830,7 @@ LTRESULT CCharacterPlugin::PreHook_EditStringList(const char* szRezPath, const c
 		char szFile[256];
 		if (g_pInventoryButeMgr == LTNULL )
 		{
-			sprintf(szFile, "%s\\Attributes\\Inventory.txt", szRezPath);
+			sprintf(szFile, "%s\\SA_SCRIPTS\\Inventory.txt", szRezPath);
 			s_InventoryButeMgr.SetInRezFile(LTFALSE);
 			s_InventoryButeMgr.Init(szFile);
 		}

@@ -18,6 +18,8 @@
 
 #include <malloc.h>
 
+#ifdef LTJS_HAS_WONAPI
+
 extern ILTCSBase* g_pLTCSBase;
 extern ILTClient* g_pLTClient;
 
@@ -706,4 +708,5 @@ void TitanTest_Term()
 	}
 }
 #endif // _FINAL
+#endif // LTJS_HAS_WONAPI
 // BBi

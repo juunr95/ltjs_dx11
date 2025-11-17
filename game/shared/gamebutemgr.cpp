@@ -88,36 +88,36 @@ LTBOOL CGameButeMgr::Parse(const char* sButeFile)
 
 	BOOL bRet = TRUE;
 
-
-	//if there is no g_pLTBase, then we can't read from the stream
-	if (!g_pLTBase || !m_bInRezFile)
-	{
-
-		// Append the GAME directory onto the filename if this file is normally
-		// stored in the .rez file...
-
-		if (m_bInRezFile)
+	if (sButeFile != 0) {
+		//if there is no g_pLTBase, then we can't read from the stream
+		if (!g_pLTBase || !m_bInRezFile)
 		{
-			m_strAttributeFile.Format("Game\\%s", sButeFile);
-		}
-		else
-		{
-			m_strAttributeFile.Format("%s", sButeFile);
-		}
+
+			// Append the GAME directory onto the filename if this file is normally
+			// stored in the .rez file...
+
+			if (m_bInRezFile)
+			{
+				m_strAttributeFile.Format("Game\\%s", sButeFile);
+			}
+			else
+			{
+				m_strAttributeFile.Format("%s", sButeFile);
+			}
 
 
-		if (m_pCryptKey)
-		{
-			bRet = m_buteMgr.Parse(m_strAttributeFile, m_pCryptKey);
-		}
-		else
-		{
-			bRet = m_buteMgr.Parse(m_strAttributeFile);
-		}
+			if (m_pCryptKey)
+			{
+				bRet = m_buteMgr.Parse(m_strAttributeFile, m_pCryptKey);
+			}
+			else
+			{
+				bRet = m_buteMgr.Parse(m_strAttributeFile);
+			}
 
-		return bRet;
+			return bRet;
+		}
 	}
-
 
 	// Open the file...
 

@@ -15,8 +15,8 @@
 #include "ltbasetypes.h"
 #include "templatelist.h"
 
-#define MISSION_DEFAULT_FILE		"Attributes\\Missions.txt"
-#define MISSION_COOP_FILE			"Attributes\\CoopMissions.txt"
+#define MISSION_DEFAULT_FILE		"SA_SCRIPTS\\Missions.txt"
+#define MISSION_COOP_FILE			"SA_SCRIPTS\\CoopMissions.txt"
 #define MISSION_DM_FILE 			"DMMissions.txt"
 //#define MISSION_TDM_FILE 			"TDMMissions.txt"
 #define MISSION_DD_FILE 			"DDMissions.txt"

@@ -38,15 +38,6 @@ public:
 
 	void		SetCenter(int x, int y);
 
-	// Some functions for controlling the appearance of the cursor
-	void		UseSprite(CScreenSprite * pSprite);
-
-	void		UseSprite(char * pFile);	// can be spr or dtx, returns ID
-	void		UseGlowSprite(char * pFile);
-	void		UseBackgroundSprite(char * pFile);
-
-	void		KillSprite();
-
 	// TODO at some point in the future, we can allow multiple sprites and other FX here.
 
 private:
@@ -57,14 +48,8 @@ private:
 
 	LTIntPt		m_CursorCenter;
 
-	// old-style cursor
-	HLTCURSOR	m_hCursor;
-	HSURFACE	m_hSurfCursor;
-
-	ScreenSpriteArray m_SpriteArray;
-	CScreenSprite * m_pCursorSprite;
-	CScreenSprite * m_pCursorGlowSprite;
-	CScreenSprite * m_pCursorBackgroundSprite;
+	HTEXTURE    m_hTexCursor;
+	LTPoly_GT4  m_PolyCursor;
 };
 
 #endif // __CURSOR_MGR_H__

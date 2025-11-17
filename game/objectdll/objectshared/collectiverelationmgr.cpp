@@ -25,6 +25,7 @@
 #include "serverutilities.h"
 
 #include <algorithm>
+#include <functional>
 
 // Forward declarations
 
@@ -33,8 +34,7 @@
 // Statics
 
 
-struct RemoveRelationFromObjectRelationMgr :
-public std::binary_function< IMomentoUser*, const RelationDescription, bool>
+struct RemoveRelationFromObjectRelationMgr
 {
 public:
 	bool operator()(IMomentoUser* pIUser, const RelationDescription RD) const
@@ -201,14 +201,14 @@ void CCollectiveRelationMgr::AddRelation(const RelationDescription& RD)
 void CCollectiveRelationMgr::RemoveRelationCallback(const RelationDescription& RD)
 {
 	using std::for_each;
-	using std::bind2nd;
+	using std::bind;
 
 	AITRACE(AIShowRelations, ( (HOBJECT)NULL, "Collective removing: %s %s %s", CRelationTools::GetInstance()->ConvertAlignmentEnumToString(RD.eAlignment), CRelationTools::GetInstance()->ConvertTraitEnumToString(RD.eTrait), RD.szValue) );
 
 	// Copy the RelationDesciption, because we can't pass a reference into
 	// the search
 	RelationDescription InstRD = RD;
-	for_each(m_listMembers.begin(),  m_listMembers.end(),  bind2nd( RemoveRelationFromObjectRelationMgr(), InstRD));
+	for_each(m_listMembers.begin(),  m_listMembers.end(), bind( RemoveRelationFromObjectRelationMgr(), InstRD));
 
 }
 

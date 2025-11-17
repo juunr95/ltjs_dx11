@@ -24,7 +24,7 @@ struct CPolyDebrisFX;
 
 extern CSurfaceMgr* g_pSurfaceMgr;
 
-#define SRFMGR_DEFAULT_FILE		"Attributes\\Surface.txt"
+#define SRFMGR_DEFAULT_FILE		"SA_SCRIPTS\\Surface.txt"
 
 #define SRF_MAX_FILE_PATH			64
 #define SRF_MAX_NAME_LENGTH			32

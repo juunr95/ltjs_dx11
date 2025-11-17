@@ -727,7 +727,7 @@ LTRESULT AIInformationVolumePlugin::PreHook_EditStringList(const char* szRezPath
 	if ( !bPluginInitted )
 	{
 		char szFile[256];
-		sprintf(szFile, "%s\\Attributes\\AIButes.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\AIButes.txt", szRezPath);
 		s_AIButeMgr.SetInRezFile(LTFALSE);
         s_AIButeMgr.Init(szFile);
 

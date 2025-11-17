@@ -21,7 +21,7 @@
 class CDebrisMgr;
 extern CDebrisMgr* g_pDebrisMgr;
 
-#define DEBRISMGR_DEFAULT_FILE		"Attributes\\Debris.txt"
+#define DEBRISMGR_DEFAULT_FILE		"SA_SCRIPTS\\Debris.txt"
 #define DEBRISMGR_INVALID_ID		(uint8)-1
 
 #define DEBRIS_MAX_NAME_LENGTH		32

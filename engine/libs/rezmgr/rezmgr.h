@@ -19,7 +19,7 @@
 typedef unsigned long int	DWORD;
 #endif
 
-#define RezMgrUserTitleSize     60
+#define RezMgrUserTitleSize     19
 
 #ifndef __STDIO_H__
 #include <stdio.h>

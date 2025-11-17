@@ -55,11 +55,6 @@ int _findclose(long handle) { return -1; }
 
 #pragma pack(1)
 struct FileMainHeaderStruct {
-  char CR1;
-  char LF1;
-  char FileType[RezMgrUserTitleSize];
-  char CR2;
-  char LF2;
   char UserTitle[RezMgrUserTitleSize];
   char CR3;
   char LF3;
@@ -1331,16 +1326,6 @@ BOOL CRezMgr::Open(const char* FileName, BOOL ReadOnly, BOOL CreateNew) {
 		}
 	}
 
-    // verify that this is a valid file
-    ASSERT(Header.CR1 == 0x0d);
-    ASSERT(Header.LF2 == 0x0a);
-    ASSERT(Header.EOF1 == 0x1a);
-    ASSERT(m_nFileFormatVersion == 1);
-	if (Header.CR1 != 0x0d) return FALSE;
-	if (Header.LF2 != 0x0a) return FALSE;
-	if (Header.EOF1 != 0x1a) return FALSE;
-	if (m_nFileFormatVersion != 1) return FALSE;
-
     // create root directory
     LT_MEM_TRACK_ALLOC(m_pRootDir = new CRezDir(this, NULL, "", m_nRootDirPos, m_nRootDirSize, m_nRootDirTime, m_nDirNumHashBins, m_nTypNumHashBins),LT_MEM_TYPE_MISC);
     ASSERT(m_pRootDir != NULL);
@@ -1423,9 +1408,6 @@ BOOL CRezMgr::OpenAdditional(const char* FileName, BOOL bOverwriteItems) {
   if (Header.LargestRezNameSize > m_nLargestRezNameSize) m_nLargestRezNameSize = Header.LargestRezNameSize;
   if (Header.LargestCommentSize > m_nLargestCommentSize) m_nLargestCommentSize = Header.LargestCommentSize;
 
-  // verify that this is a valid file
-  ASSERT(Header.CR1 == 0x0d);
-  ASSERT(Header.LF2 == 0x0a);
   ASSERT(Header.EOF1 == 0x1a);
   ASSERT(Header.FileFormatVersion == 1);
 
@@ -1750,16 +1732,9 @@ BOOL CRezMgr::Flush() {
     
     // fill out the permant parts of the header
     FileMainHeaderStruct Header;
-    Header.CR1 = 0x0d;
-    Header.CR2 = 0x0d;
     Header.CR3 = 0x0d;
-    Header.LF1 = 0x0a;
-    Header.LF2 = 0x0a;
     Header.LF3 = 0x0a;
     Header.EOF1 = 0x1a;
-    memset(Header.FileType,' ',RezMgrUserTitleSize);
-    strcpy(Header.FileType,"RezMgr Version 1 Copyright (C) 1995 MONOLITH INC.");
-    Header.FileType[strlen(Header.FileType)] = ' ';
     memset(Header.UserTitle,' ',RezMgrUserTitleSize);
 	if (m_sUserTitle[0] != '\0') memcpy(Header.UserTitle,m_sUserTitle,strlen(m_sUserTitle));
     

@@ -51,8 +51,8 @@ CTO2PlayerMgr::~CTO2PlayerMgr()
 
 LTBOOL CTO2PlayerMgr::Init()
 {
-	const WEAPON* pWeapon = g_pWeaponMgr->GetWeapon("Keychain");
-	m_nFlashlightID = pWeapon->nId;
+	//const WEAPON* pWeapon = g_pWeaponMgr->GetWeapon("Keychain");
+	//m_nFlashlightID = pWeapon->nId;
 	return CPlayerMgr::Init();
 }
 

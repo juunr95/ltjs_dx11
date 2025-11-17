@@ -55,6 +55,7 @@
 #include "sharedfxstructs.h"
 
 #include <algorithm>
+#include <functional>
 
 extern CAIGoalButeMgr* g_pAIGoalButeMgr;
 extern CServerSoundMgr* g_pServerSoundMgr;
@@ -468,7 +469,7 @@ static CBankedList<INVALID_NODE> s_bankINVALID_NODE;
 // Deletes a node if it has expired.
 //
 struct DeleteExpiredNodes :
-std::binary_function<INVALID_NODE*, float, INVALID_NODE*>
+std::function<INVALID_NODE*>
 {
 	INVALID_NODE* operator()( INVALID_NODE* pNode, float flTime ) const
 	{

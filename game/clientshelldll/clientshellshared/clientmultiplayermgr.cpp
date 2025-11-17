@@ -684,7 +684,7 @@ bool ClientMultiplayerMgr::HandleMsgHandshake( ILTMessage_Read & msg )
 			uint32 nSurfaceMaskedCRC = nSurfaceCRC ^ nXORMask;
 
 			// CRC the damagefx.txt
-			static uint32 nDamageFxCRC = CRC32::CalcRezFileCRC( "attributes\\damagefx.txt" );
+			static uint32 nDamageFxCRC = CRC32::CalcRezFileCRC( "SA_SCRIPTS\\damagefx.txt" );
 			uint32 nDamageFxMaskedCRC = nDamageFxCRC ^ nXORMask;
 
 			// Get the client shell file CRC

@@ -64,7 +64,7 @@ static char s_szBuffer[1024];
 
 	#define	MODELBMGR_MODEL_DEFAULT_MODELFILE					CString("chars\\models\\hero_action.ltb")
 	#define	MODELBMGR_MODEL_DEFAULT_HANDSSKIN					CString("guns\\skins_pv\\actionHands_pv.dtx")
-	#define	MODELBMGR_MODEL_DEFAULT_ANIMATION					CString("Attributes\\AnimationsHuman.txt")
+	#define	MODELBMGR_MODEL_DEFAULT_ANIMATION					CString("SA_SCRIPTS\\AnimationsHuman.txt")
 	#define	MODELBMGR_MODEL_DEFAULT_AINAME						CString("Hero")
 	#define	MODELBMGR_MODEL_DEFAULT_AIONLY						LTTRUE
 	#define MODELBMGR_MODEL_DEFAULT_CANBECARRIED				LTTRUE

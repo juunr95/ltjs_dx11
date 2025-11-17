@@ -1147,9 +1147,14 @@ LTRESULT CD3DDrawPrim::DrawPrim(LT_POLYGT4 *pPrim, uint32 nCount) {
   			LT_POLYGT4* pPrimPtr = pPrim;
   			while (nCount) {	// Note: Not checking return everytime for speed...
   				for (int i=0;i<4;++i) {
-  					m_VertTransBufT[i].x	= pPrimPtr->verts[i].x; m_VertTransBufT[i].y = pPrimPtr->verts[i].y; m_VertTransBufT[i].z = pPrimPtr->verts[i].z; m_VertTransBufT[i].rhw = 1.0f;
-  					m_VertTransBufT[i].rgba = RGBA_MAKE(pPrimPtr->verts[i].rgba.r,pPrimPtr->verts[i].rgba.g,pPrimPtr->verts[i].rgba.b,pPrimPtr->verts[i].rgba.a);
-  					m_VertTransBufT[i].u	= pPrimPtr->verts[i].u; m_VertTransBufT[i].v = pPrimPtr->verts[i].v; }
+  					m_VertTransBufT[i].x		= pPrimPtr->verts[i].x;
+					m_VertTransBufT[i].y		= pPrimPtr->verts[i].y;
+					m_VertTransBufT[i].z		= pPrimPtr->verts[i].z;
+					m_VertTransBufT[i].rhw		= 1.0f;
+  					m_VertTransBufT[i].rgba		= RGBA_MAKE(pPrimPtr->verts[i].rgba.r,pPrimPtr->verts[i].rgba.g,pPrimPtr->verts[i].rgba.b,pPrimPtr->verts[i].rgba.a);
+  					m_VertTransBufT[i].u		= pPrimPtr->verts[i].u;
+					m_VertTransBufT[i].v		= pPrimPtr->verts[i].v;
+				}
 
   			EFFECT_SHADER_MACRO(hRes, pDevice->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, m_VertTransBufT, sizeof(DRAWPRIM_D3DTRANS_TEX)));
 			if (hRes != D3D_OK) 

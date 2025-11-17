@@ -17,7 +17,7 @@
 #include "idlist.h"
 #include "butelistreader.h"
 
-#define KEY_DEFAULT_FILE	"Attributes\\KeyItems.txt"
+#define KEY_DEFAULT_FILE	"SA_SCRIPTS\\KeyItems.txt"
 #define KEY_MAX_NAME		32
 #define KEY_MAX_FILE_PATH	64
 

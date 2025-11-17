@@ -57,7 +57,7 @@ class CGameButeMgr
 		CString		m_strAttributeFile;
 		CButeMgr	m_buteMgr;
 
-		char*		m_pCryptKey;
+		char*		 m_pCryptKey;
         LTBOOL       m_bInRezFile;
 
         LTBOOL       Parse(const char* sButeFile);

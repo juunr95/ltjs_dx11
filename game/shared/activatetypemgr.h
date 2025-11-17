@@ -31,7 +31,7 @@
 // Defines...
 //
 
-	#define ATMGR_DEFAULT_FILE		"Attributes\\ActivateTypes.txt"
+	#define ATMGR_DEFAULT_FILE		"SA_SCRIPTS\\ActivateTypes.txt"
 	#define ATMGR_INVALID_ID		-1
 	#define ATMGR_MAX_NAME_LENGTH	32
 

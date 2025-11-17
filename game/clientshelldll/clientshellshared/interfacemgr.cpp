@@ -532,13 +532,14 @@ LTBOOL CInterfaceMgr::Init()
         return LTFALSE;
 	}
 
+	/*
     if (!m_MenuMgr.Init())
 	{
 		// If we couldn't init, something critical must have happened
         g_pLTClient->ShutdownWithMessage("ERROR in CInterfaceMgr::Init():  Could not initialize MenuMgr!");
         return LTFALSE;
 	}
-
+	*/
 
 
     m_ClientInfo.Init();
@@ -548,13 +549,15 @@ LTBOOL CInterfaceMgr::Init()
         g_pLTClient->ShutdownWithMessage("ERROR in CInterfaceMgr::Init():  Could not initialize Player Stats!");
         return LTFALSE;
 	}
+	/*
 	if (!GetHUDMgr()->Init())
 	{
         g_pLTClient->ShutdownWithMessage("ERROR in CInterfaceMgr::Init():  Could not initialize HUDMgr!");
         return LTFALSE;
 	}
+	*/
 
-	g_pPaused->Init();
+	//g_pPaused->Init();
 
 	m_PopupText.Init();
 	m_WeaponChooser.Init();
@@ -577,14 +580,14 @@ LTBOOL CInterfaceMgr::Init()
 		return LTFALSE;
 	}
 
-
+	/*
 	if (!m_ProfileMgr.Init()) 
 	{
 		g_pLTClient->ShutdownWithMessage("ERROR in CProfileMgr::Init():  Could not initialize ProfileMgr!");
 		m_ProfileMgr.Term();
 		return LTFALSE;
 	}
-
+	*/
 
 	// Create the surface used for making letterboxed cinematics...
     LTRect rcSrc;
@@ -973,11 +976,12 @@ LTBOOL CInterfaceMgr::DrawSFX()
 
 void CInterfaceMgr::UpdateScreenState()
 {
+	/*
 	if (GetScreenMgr( )->GetCurrentScreenID() == SCREEN_ID_NONE)
 	{
 		SwitchToScreen(SCREEN_ID_MAIN);
 	}
-	
+	*/
 	// [KLS 9/2/02] FogEnabled is cleared in PreScreenState, however it is possible for
 	// it to get set to 1 while in the screen state.  This will ensure that we never
 	// render the screen state with fog enabled.  PostScreenState will return FogEnabled
@@ -994,7 +998,7 @@ void CInterfaceMgr::UpdateScreenState()
 		DrawSFX();
 
 		g_pLTClient->StartOptimized2D();
-		m_InterfaceResMgr.DrawScreen();
+		//m_InterfaceResMgr.DrawScreen();
 		UpdateScreenFade();
 		g_pLTClient->EndOptimized2D();
 		g_pLTClient->End3D(END3D_CANDRAWCONSOLE);
@@ -3044,12 +3048,12 @@ LTBOOL CInterfaceMgr::OnKeyUp(int key)
 		AddToClearScreenCount();
         return LTTRUE;
 	}
-
+	/*
 	if (g_pChatInput->IsVisible())
 	{
         return LTTRUE;
 	}
-
+	*/
 	switch (m_eGameState)
 	{
 	case GS_SCREEN:
@@ -3108,12 +3112,13 @@ void CInterfaceMgr::OnChar(unsigned char c)
 		m_MessageBox.HandleChar(c);
 		return;
 	}
-
+	/*
 	if (g_pChatInput->IsVisible())
 	{
 		g_pChatInput->HandleChar(c);
 		return;
 	}
+	*/
 	if (m_eGameState == GS_SCREEN)
 	{
 		GetScreenMgr( )->HandleChar(c);

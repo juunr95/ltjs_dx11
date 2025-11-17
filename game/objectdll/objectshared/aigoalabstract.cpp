@@ -23,7 +23,7 @@
 #include "aimovement.h"
 
 #include <algorithm>
-
+#include <functional>
 
 // Globals/statics.
 static LTFLOAT s_fGoalUpdateBasis = 0.0f;
@@ -35,7 +35,7 @@ extern class CAIPathMgr* g_pAIPathMgr;
 // Locks a node represented by an INVALID_NODE structure
 //
 struct BlockNode :
-std::unary_function<INVALID_NODE*, int>
+std::function<INVALID_NODE*>
 {
 	BlockNode( HOBJECT hBlocker ) { m_hBlocker = hBlocker; }
 	HOBJECT m_hBlocker;
@@ -59,7 +59,7 @@ std::unary_function<INVALID_NODE*, int>
 // Unlocks a locked node represented by an INVALID_NODE structure
 //
 struct UnblockNode :
-std::unary_function<INVALID_NODE*, int>
+std::function<INVALID_NODE*>
 {
 	UnblockNode( HOBJECT hBlocker ) { m_hBlocker = hBlocker; }
 	HOBJECT m_hBlocker;
@@ -645,7 +645,7 @@ bool CAIGoalAbstract::HandleCommand(const CParsedMsg &cMsg)
 void CAIGoalAbstract::AddInvalidNode( HOBJECT hNode )
 {
 	using std::find_if;
-	using std::bind2nd;
+	using std::bind;
 	using std::equal_to;
 
 	std::vector<INVALID_NODE*>* pList = m_pAI->GetInvalidNodeList();
@@ -657,7 +657,7 @@ void CAIGoalAbstract::AddInvalidNode( HOBJECT hNode )
 	it = find_if(
 		pList->begin(),
 		pList->end(),
-		bind2nd( equal_to<INVALID_NODE*>(), pNull ));
+		bind( equal_to<INVALID_NODE*>(), pNull ));
 
 	if ( it !=  pList->end() )
 	{

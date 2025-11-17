@@ -33,6 +33,12 @@
 #include "clientsoundmgr.h"
 #include "msgids.h"
 
+#ifdef USE_ULTRALIGHT
+#include "Ultralight/Ultralight.h"
+#include "LithtechUltralightGPU.h"
+using namespace ultralight;
+#endif
+
 class CSpecialFX;
 class CCameraFX;
 class CGameTexMgr;
@@ -286,6 +292,12 @@ private :
 	CSFXMgr			m_sfxMgr;
 	CClientFXMgr	m_ClientFXMgr;		// This handels the Client fx created with FxED
 
+#ifdef USE_ULTRALIGHT
+	ultralight::RefPtr<Renderer>				m_pUltralightRenderer;
+	ultralight::RefPtr<View>					m_pUltralightView;
+	LithtechUltralightGPU*						m_UltralightDriver;
+	Config										m_UltralightConfig;
+#endif
 
     bool      m_bShowPlayerPos;       // Display player's position.
     bool      m_bShowCamPosRot;       // Display camera's position/rotation.

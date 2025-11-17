@@ -18,7 +18,7 @@
 class CServerSoundMgr;
 extern CServerSoundMgr* g_pServerSoundMgr;
 
-#define SSNDMGR_DEFAULT_FILE		"Attributes\\ServerSnd.txt"
+#define SSNDMGR_DEFAULT_FILE		"SA_SCRIPTS\\ServerSnd.txt"
 
 class CServerSoundMgr : public CGameSoundMgr
 {

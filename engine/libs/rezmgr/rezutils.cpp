@@ -918,7 +918,7 @@ int RezCompiler(const char* sCmd, const char* sRezFile, const char* sTargetDir, 
       g_pMgr = &Mgr;
 
 	  // check for LithTech header
-	  if (!CheckLithHeader(g_pMgr)) break;
+	  //if (!CheckLithHeader(g_pMgr)) break;
 
       // get the root directory of the resource manager
       CRezDir* pDir = Mgr.GetRootDir();

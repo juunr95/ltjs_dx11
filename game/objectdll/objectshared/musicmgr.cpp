@@ -14,7 +14,7 @@ class CMusicButeMgr : public CGameButeMgr
 {
 	public : // Public member variables
 
-        LTBOOL	Init(const char* szAttributeFile = "Attributes\\Music.txt")
+        LTBOOL	Init(const char* szAttributeFile = "SA_SCRIPTS\\Music.txt")
 		{
 			return Parse(szAttributeFile);
 		}

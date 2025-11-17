@@ -26,6 +26,7 @@
 #include "ltjs_sdl_utils.h"
 #endif // LTJS_SDL_BACKEND
 
+
 RMode* g_pModeList;
 
 #ifndef LTJS_SDL_BACKEND
@@ -341,7 +342,7 @@ int d3d_Init(RenderStructInit *pInit)
 		AddDebugMessage(0, "VisibleSet::Init failed (invalid object list size?).");
  
 		return RENDER_ERROR; 
-	} 
+	}
 
 	LT_MEM_TRACK_ALLOC(new D3DShadowTextureFactory(),LT_MEM_TYPE_RENDERER); // Shadow texture map related initialization stuff added here
 

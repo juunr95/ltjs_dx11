@@ -868,10 +868,14 @@ ltjs::ucs::CodePoint ltjs_cp_to_ucs(
 		case ltjs::ShellResourceCodePage::windows_1252:
 			return ltjs::windows_1252::to_unicode(cp_code_point);
 
-		default:
-			assert(!"Unsupported code page.");
-			return 0;
+		case ltjs::ShellResourceCodePage::utf_8:
+			const char* p = &cp_code_point;
+			return ltjs::windows_1252::utf8_to_unicode(p);
+
 	}
+	
+
+	return 0;
 }
 
 bool GetGlyphSizes(
@@ -1348,7 +1352,8 @@ bool CUIVectorFont::Init(
 	uint8 asciiEnd,
 	LTFontParams* fontParams)
 {
-	char szChars[256];
+	const uint8 size = asciiEnd - asciiStart;
+	std::vector<char> szChars(size + 2);
 
 	auto i = 0;
 
@@ -1359,7 +1364,7 @@ bool CUIVectorFont::Init(
 
 	szChars[i - asciiStart] = 0;
 
-	const auto bOk = Init(pszFontFile, pszFontFace, pointSize, szChars, fontParams);
+	const auto bOk = Init(pszFontFile, pszFontFace, pointSize, szChars.data(), fontParams);
 
 	return bOk;
 }

@@ -2487,13 +2487,13 @@ LTRESULT CAIHumanPlugin::PreHook_EditStringList(const char* szRezPath, const cha
 		// Make sure the modelbutemgr plugin is inited.
 		m_ModelButeMgrPlugin.PreHook_EditStringList(szRezPath, szPropName, aszStrings, pcStrings, cMaxStrings, cMaxStringLength);
 
-		sprintf(szFile, "%s\\Attributes\\AIButes.txt", szRezPath);
+		sprintf(szFile, "%s\\SA_SCRIPTS\\AIButes.txt", szRezPath);
 		s_AIButeMgr.SetInRezFile(LTFALSE);
         s_AIButeMgr.Init(szFile);
 
 		if ( g_pAIGoalButeMgr == LTNULL )
 		{
-			sprintf(szFile, "%s\\Attributes\\AIGoals.txt", szRezPath);
+			sprintf(szFile, "%s\\SA_SCRIPTS\\AIGoals.txt", szRezPath);
 			s_AIGoalButeMgr.SetInRezFile(LTFALSE);
 			s_AIGoalButeMgr.Init(szFile);
 		}

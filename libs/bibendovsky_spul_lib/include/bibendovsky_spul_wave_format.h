@@ -52,7 +52,8 @@ namespace spul
 //
 struct WaveFormat
 {
-	static constexpr auto class_size = 14;
+	static constexpr auto packed_size = 14;
+	static constexpr auto class_size = packed_size;
 
 
 	WaveFormatTag tag_;
